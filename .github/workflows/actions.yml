@@ -18,4 +18,6 @@ jobs:
         run: npm run lint
 
       - name: Run Cypress
-        run: npm run cypress:run-${{ matrix.browsers }}
+        env:
+          BROWSER: ${{ matrix.browsers }}
+        run: npm run cy:run:$BROWSER
