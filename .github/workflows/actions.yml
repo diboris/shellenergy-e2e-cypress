@@ -1,0 +1,21 @@
+name: 'shellenergy-e2e-cypress'
+
+on: [ push, workflow_dispatch ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [ chrome, firefox, electron ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+
+      - name: Install node modules
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Cypress
+        run: npm run cypress:run-${{ matrix.browsers }}
